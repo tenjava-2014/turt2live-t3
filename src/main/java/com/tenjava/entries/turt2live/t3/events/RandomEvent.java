@@ -15,6 +15,7 @@ public abstract class RandomEvent {
      */
     public final void stop() {
         lastEnd = System.currentTimeMillis();
+        running = true;
 
         onStop();
     }
@@ -23,6 +24,8 @@ public abstract class RandomEvent {
      * Starts the event
      */
     public final void start() {
+        running = false;
+
         onStart();
     }
 
@@ -31,7 +34,7 @@ public abstract class RandomEvent {
      *
      * @return true if running, false otherwise
      */
-    public final boolean isRunning() {
+    public boolean isRunning() {
         return running;
     }
 
@@ -42,6 +45,14 @@ public abstract class RandomEvent {
      */
     public final long getLastEnd() {
         return lastEnd;
+    }
+
+    /**
+     * Called from the event manager every interval
+     *
+     * @param eventManager the event manager calling this method
+     */
+    public void tick(EventManager eventManager) {
     }
 
     /**

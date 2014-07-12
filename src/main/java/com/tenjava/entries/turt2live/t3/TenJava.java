@@ -1,6 +1,7 @@
 package com.tenjava.entries.turt2live.t3;
 
 import com.tenjava.entries.turt2live.t3.events.EventManager;
+import com.tenjava.entries.turt2live.t3.events.testevent.TestEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TenJava extends JavaPlugin {
@@ -18,16 +19,19 @@ public class TenJava extends JavaPlugin {
         // Init everything
         eventManager = new EventManager(getConfig().getInt("max-events", 10));
 
+        // Load some events
+        eventManager.registerEvent(new TestEvent());
+
         // Start everything
         eventManager.start();
     }
 
     @Override
     public void onDisable() {
-        instance = null;
-
         // HALT
         eventManager.stop();
+
+        instance = null;
     }
 
     /**

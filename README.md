@@ -38,5 +38,42 @@ worlds:
 
 Now all you have to do is survive.
 
+Mechanics
+---------
+
+You have several things to look out for while exploring tenjavria (pronounced ten-jav-ree-ah). These things include all of your standard Minecraft
+mechanics (health, food, not dying, etc) as well as the risks that come with tenjavria. One of the major risks is body temperature. You don't want
+it too high or too low, or else you're at risk. Warm blocks (like fire) increase your body temperature while cold blocks (like ice) cool your body
+temperature. During the day the world temperature hits an insane amount, so stay cool. During the night however, the temperature drops, so get yourself
+warm! Be careful though, the day/night changes in temperature are very quick!
+
+There are five stages of body temperature, and here they are:
+
+| Temperature Range | Description | Effects                                        |
+| :---------------- | :---------- | :--------------------------------------------- |
+| < -20             | Hypothermia | You'll die VERY soon                           |
+| -5 -> -20         | Shivering   | Your bones rattle your pockets, dropping items |
+| -5 -> 15          | Normal      | Stay within this range to survive              |
+| 15 -> 30          | Sweating    | It becomes more difficult to walk              |
+| > 30              | Burning     | You'll die VERY soon                           |
+
+In addition to the temperature, you will want to keep moving. At night if you stay in one place too long you will end up encountering some zombies.
+
+Good luck and thank you for visiting tenjavria!
+
+Notes
+-----
+
+Planned features that were supposed to be working include the following (see commit log for information):
+
+- Surface temperature
+- Player temperature (where armor, inventory item count, and how much you walk matter)
+- Blocks which keep you warm/cool
+- Random chests which have items (proved to be too resource intensive to have that many chests)
+
+Ideally the plan was to have the sun/moon cause severe temperature differences so that the player would have to think about how much they move, where they build,
+what they build, and what they wear. Having any of these mechanics balanced off by just enough would cause the player to loose items (shivering), walk slower (sweating),
+or die VERY quickly (hypothermia / overheating). I may pick this up after the contest just to damn well finish it, but oh well.
+
 <!-- Hi, turt2live! This is the default README for every ten.java submission. -->
 <!-- We encourage you to edit this README with some information about your submission – keep in mind you'll be scored on documentation! -->

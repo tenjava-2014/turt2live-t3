@@ -66,14 +66,9 @@ Notes
 
 Planned features that were supposed to be working include the following (see commit log for information):
 
-- Surface temperature
-- Player temperature (where armor, inventory item count, and how much you walk matter)
-- Blocks which keep you warm/cool
 - Random chests which have items (proved to be too resource intensive to have that many chests)
-
-Ideally the plan was to have the sun/moon cause severe temperature differences so that the player would have to think about how much they move, where they build,
-what they build, and what they wear. Having any of these mechanics balanced off by just enough would cause the player to loose items (shivering), walk slower (sweating),
-or die VERY quickly (hypothermia / overheating). I may pick this up after the contest just to damn well finish it, but oh well.
+- Upon landing, you drop items
+- Mobs find you when you don't move at night
 
 <!-- Hi, turt2live! This is the default README for every ten.java submission. -->
 <!-- We encourage you to edit this README with some information about your submission – keep in mind you'll be scored on documentation! -->

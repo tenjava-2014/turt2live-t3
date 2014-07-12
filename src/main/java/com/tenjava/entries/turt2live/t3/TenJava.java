@@ -16,18 +16,14 @@ public class TenJava extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
 
-        getServer().getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(new GameListener(this), this);
     }
 
     @Override
     public void onDisable() {
-        instance = null;
-    }
+        getServer().getScheduler().cancelTasks(this);
 
-    @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        event.getPlayer().setGameMode(GameMode.CREATIVE);
-        event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 8, 130, 8));
+        instance = null;
     }
 
     @Override

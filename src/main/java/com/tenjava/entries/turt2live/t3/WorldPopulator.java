@@ -11,8 +11,8 @@ public class WorldPopulator extends BlockPopulator {
 
     private int spawnY;
 
-     WorldPopulator(int spawnY){
-        this.spawnY=spawnY;
+    WorldPopulator(int spawnY) {
+        this.spawnY = spawnY;
     }
 
     @Override

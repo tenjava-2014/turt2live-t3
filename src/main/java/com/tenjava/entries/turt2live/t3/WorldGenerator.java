@@ -20,7 +20,8 @@ public class WorldGenerator extends ChunkGenerator {
             Material.SPONGE.getId(),
             Material.GLASS.getId(),
             Material.LOG.getId(),
-            Material.WOOL.getId()
+            Material.WOOL.getId(),
+            Material.ICE.getId()
     };
     private int[] semiRareIds = new int[] {
             Material.IRON_BLOCK.getId(),
@@ -29,7 +30,9 @@ public class WorldGenerator extends ChunkGenerator {
             Material.IRON_ORE.getId(),
             Material.LAPIS_ORE.getId(),
             Material.REDSTONE_ORE.getId(),
-            Material.CHEST.getId()
+            Material.GLOWSTONE.getId(),
+            Material.NETHERRACK.getId(),
+            Material.OBSIDIAN.getId()
     };
     private int[] rareIds = new int[] {
             Material.DIAMOND_BLOCK.getId(),
@@ -48,9 +51,7 @@ public class WorldGenerator extends ChunkGenerator {
     @Override
     public byte[][] generateBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
         // generates a chunk
-
         byte[][] blocks = new byte[world.getMaxHeight() / 16][];
-
         boolean spawnChunk = x == 0 && z == 0;
 
         if (spawnChunk) {
@@ -146,12 +147,14 @@ public class WorldGenerator extends ChunkGenerator {
     }
 
     public void sphere(int x, int y, int z, int material, int radius, byte[][] chunk) {
-        System.out.println("SPHERE: " + x + " " + y + " " + z + " " + material + " " + radius);
         for (int cx = x - radius; cx < x + radius; cx++) {
             for (int cy = y - radius; cy < y + radius; cy++) {
                 for (int cz = z - radius; cz < z + radius; cz++) {
                     if (inRadius(x, y, z, cx, cy, cz, radius)) {
-                        setBlock(cx, cy, cz, material, chunk);
+                        int m = material;
+                        if (cx == x && cy == y && cz == z) m = Material.DIAMOND_BLOCK.getId();
+
+                        setBlock(cx, cy, cz, m, chunk);
                     }
                 }
             }
@@ -160,7 +163,7 @@ public class WorldGenerator extends ChunkGenerator {
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
-        return new Location(world, 0, spawnY, 0);
+        return new Location(world, 9.5, spawnY + 2, 9.5);
     }
 
     public void setRange(int sx, int sy, int sz, int dx, int dy, int dz, int id, byte[][] chunk) {

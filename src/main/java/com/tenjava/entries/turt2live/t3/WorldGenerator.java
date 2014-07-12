@@ -112,7 +112,7 @@ public class WorldGenerator extends ChunkGenerator {
             double r = random.nextDouble();
 
             if (r < 0.1) sphereId = Material.DIRT.getId();
-            if (r < 0.01) sphereId = Material.PACKED_ICE.getId();
+            if (r < 0.01) sphereId = Material.STONE.getId();
             if (r < 0.006) sphereId = Material.IRON_BLOCK.getId();
             if (r < 0.002) sphereId = Material.DIAMOND_BLOCK.getId();
 

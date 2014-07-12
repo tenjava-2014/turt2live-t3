@@ -17,6 +17,7 @@ public class EventManager {
     private List<RandomEvent> currentEvents = new ArrayList<RandomEvent>();
     private Random random = new Random(); // This should be good enough
     private int maxEvents; // negative or zero = infinite
+    private int eventTask = -1;
 
     /**
      * Creates a new event manager
@@ -33,7 +34,9 @@ public class EventManager {
      * Starts the event manager, provided it hasn't started already
      */
     public void start() {
-        TenJava.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(TenJava.getInstance(), new Runnable() {
+        if (eventTask != -1) return;
+
+        eventTask = TenJava.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(TenJava.getInstance(), new Runnable() {
             @Override
             public void run() {
                 if (!canStartNewEvent()) return; // Don't run anything if we can't
@@ -50,6 +53,17 @@ public class EventManager {
                 }
             }
         }, 0L, 20L); // 1 second timer
+    }
+
+    /**
+     * Stops the event manager by cleaning up all the potentially running events
+     */
+    public void stop() {
+        for (RandomEvent event : currentEvents) {
+            event.stop();
+        }
+
+        if (eventTask != -1) TenJava.getInstance().getServer().getScheduler().cancelTask(eventTask);
     }
 
     /**
@@ -75,15 +89,6 @@ public class EventManager {
         if (currentEvents.contains(event)) {
             event.stop();
             currentEvents.remove(event);
-        }
-    }
-
-    /**
-     * Stops the event manager by cleaning up all the potentially running events
-     */
-    public void stop() {
-        for (RandomEvent event : currentEvents) {
-            event.stop();
         }
     }
 

@@ -1,7 +1,7 @@
 package com.tenjava.entries.turt2live.t3;
 
 import com.tenjava.entries.turt2live.t3.events.EventManager;
-import com.tenjava.entries.turt2live.t3.events.testevent.TestEvent;
+import com.tenjava.entries.turt2live.t3.events.fightclub.FightClubEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TenJava extends JavaPlugin {
@@ -20,7 +20,7 @@ public class TenJava extends JavaPlugin {
         eventManager = new EventManager(getConfig().getInt("max-events", 10));
 
         // Load some events
-        eventManager.registerEvent(new TestEvent());
+        eventManager.registerEvent(new FightClubEvent());
 
         // Start everything
         eventManager.start();

@@ -1,5 +1,7 @@
 package com.tenjava.entries.turt2live.t3.events;
 
+import com.tenjava.entries.turt2live.t3.TenJava;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,8 +27,64 @@ public class EventManager {
      */
     public EventManager(int maxEvents) {
         setMaxEvents(maxEvents);
+    }
 
-        // TODO: Load events
+    /**
+     * Starts the event manager, provided it hasn't started already
+     */
+    public void start() {
+        TenJava.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(TenJava.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if (!canStartNewEvent()) return; // Don't run anything if we can't
+
+                float chosen = random.nextFloat();
+
+                for (RandomEvent event : events) {
+                    if (!currentEvents.contains(event) && event.getChance() <= chosen && event.canRun()) {
+                        currentEvents.add(event);
+                        event.start();
+                    }
+
+                    if (!canStartNewEvent()) break; // We're done!
+                }
+            }
+        }, 0L, 20L); // 1 second timer
+    }
+
+    /**
+     * Registers a new event to be potentially executed by the event manager. This
+     * makes no attempt to verify that the event is not already registered.
+     *
+     * @param event the new event to add, cannot be null
+     */
+    public void registerEvent(RandomEvent event) {
+        if (event == null) throw new IllegalArgumentException();
+
+        events.add(event);
+    }
+
+    /**
+     * Stops an event. This will do nothing if the event is not running.
+     *
+     * @param event the event to stop, cannot be null
+     */
+    public void stopEvent(RandomEvent event) {
+        if (event == null) throw new IllegalArgumentException();
+
+        if (currentEvents.contains(event)) {
+            event.stop();
+            currentEvents.remove(event);
+        }
+    }
+
+    /**
+     * Stops the event manager by cleaning up all the potentially running events
+     */
+    public void stop() {
+        for (RandomEvent event : currentEvents) {
+            event.stop();
+        }
     }
 
     /**

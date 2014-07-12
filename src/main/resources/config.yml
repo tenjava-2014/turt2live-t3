@@ -1,0 +1,4 @@
+# RandomEvents
+
+# The maximum number of events that can occur at any one time
+max-events: 10

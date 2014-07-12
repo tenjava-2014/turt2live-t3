@@ -11,22 +11,22 @@ public abstract class RandomEvent {
     protected boolean running = false;
 
     /**
+     * Starts the event
+     */
+    public final void start() {
+        running = true;
+
+        onStart();
+    }
+
+    /**
      * Stops the event
      */
     public final void stop() {
         lastEnd = System.currentTimeMillis();
-        running = true;
-
-        onStop();
-    }
-
-    /**
-     * Starts the event
-     */
-    public final void start() {
         running = false;
 
-        onStart();
+        onStop();
     }
 
     /**

@@ -3,6 +3,7 @@ package com.tenjava.entries.turt2live.t3.events;
 import com.tenjava.entries.turt2live.t3.TenJava;
 
 import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -38,22 +39,35 @@ public class EventManager {
         eventTask = TenJava.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(TenJava.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if (canStartNewEvent()) {
-                    float chosen = random.nextFloat();
+                // Execute on the main thread
+                TenJava.getInstance().getServer().getScheduler().callSyncMethod(TenJava.getInstance(), new Callable<Object>() {
+                    @Override
+                    public Object call() throws Exception {
+                        if (canStartNewEvent()) {
+                            float chosen = random.nextFloat();
+                            long now = System.currentTimeMillis();
 
-                    for (RandomEvent event : events) {
-                        if (!currentEvents.contains(event) && !event.isRunning() && chosen <= event.getChance() && event.canRun()) {
-                            currentEvents.add(event);
-                            event.start();
+                            for (RandomEvent event : events) {
+                                if (!currentEvents.contains(event)
+                                        && !event.isRunning()
+                                        && chosen <= event.getChance()
+                                        && (now - event.getLastEnd()) >= event.getCooldownTime()
+                                        && event.canRun()) {
+                                    currentEvents.add(event);
+                                    event.start();
+                                }
+
+                                if (!canStartNewEvent()) break; // We're done!
+                            }
                         }
 
-                        if (!canStartNewEvent()) break; // We're done!
-                    }
-                }
+                        for (RandomEvent event : currentEvents) {
+                            event.tick(EventManager.this);
+                        }
 
-                for (RandomEvent event : currentEvents) {
-                    event.tick(EventManager.this);
-                }
+                        return null;
+                    }
+                });
             }
         }, 0L, 20L); // 1 second timer
     }

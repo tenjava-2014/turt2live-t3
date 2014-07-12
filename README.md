@@ -35,7 +35,8 @@ worlds:
   world:
     generator: turt2live-t3
 ```
-3. Survive!
+
+Now all you have to do is survive.
 
 Mechanics
 ---------
@@ -49,7 +50,7 @@ temperature plumets and affects your ability to stay warm while during the day i
 There are five stages for which you are safe, and here they are:
 
 | Temperature Range | Description | Effects                                        |
-| ----------------- | ----------- | ---------------------------------------------- |
+| :---------------- | :---------- | :--------------------------------------------- |
 | < -20             | Hypothermia | You'll die within 30 seconds                   |
 | -5 -> -20         | Shivering   | Your bones rattle your pockets, dropping items |
 | -5 -> 15          | Normal      | Stay within this range to survive              |

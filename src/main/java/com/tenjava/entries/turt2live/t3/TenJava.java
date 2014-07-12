@@ -4,6 +4,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * Main plugin class. Does nothing but delegate.
+ *
+ * @author turt2live
+ */
 public class TenJava extends JavaPlugin implements Listener {
 
     private static TenJava instance;

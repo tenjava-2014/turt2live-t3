@@ -10,6 +10,15 @@ import org.bukkit.generator.ChunkGenerator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The world generator used to create a skyblock-ish world with more
+ * challenges and benefits. Challenges include the spacing between
+ * blocks is not even as well as the types of blocks spawned. Benefits
+ * include large spheres of materials with diamonds included in the
+ * center.
+ *
+ * @author turt2live
+ */
 public class WorldGenerator extends ChunkGenerator {
 
     private int spawnY = 128;
@@ -146,7 +155,7 @@ public class WorldGenerator extends ChunkGenerator {
         return asq + bsq + csq < rsq;
     }
 
-    public void sphere(int x, int y, int z, int material, int radius, byte[][] chunk) {
+    private void sphere(int x, int y, int z, int material, int radius, byte[][] chunk) {
         for (int cx = x - radius; cx < x + radius; cx++) {
             for (int cy = y - radius; cy < y + radius; cy++) {
                 for (int cz = z - radius; cz < z + radius; cz++) {
@@ -166,7 +175,7 @@ public class WorldGenerator extends ChunkGenerator {
         return new Location(world, 8.5, spawnY, 8.5);
     }
 
-    public void setRange(int sx, int sy, int sz, int dx, int dy, int dz, int id, byte[][] chunk) {
+    private void setRange(int sx, int sy, int sz, int dx, int dy, int dz, int id, byte[][] chunk) {
         for (int x = sx; x < dx; x++) {
             for (int y = sy; y < dy; y++) {
                 for (int z = sz; z < dz; z++) {
@@ -178,7 +187,7 @@ public class WorldGenerator extends ChunkGenerator {
 
     // This is a slightly modified version of the method found in the javadocs for ChunkGenerator.
     // jkcclemens permitted use
-    public void setBlock(int x, int y, int z, int id, byte[][] chunk) {
+    private void setBlock(int x, int y, int z, int id, byte[][] chunk) {
         if (chunk[y >> 4] == null) {
             chunk[y >> 4] = new byte[4096];
         }
@@ -187,7 +196,7 @@ public class WorldGenerator extends ChunkGenerator {
 
     // This is a slightly modified version of the method found in the javadocs for ChunkGenerator.
     // jkcclemens permitted use
-    public byte getBlock(int x, int y, int z, byte[][] chunk) {
+    private byte getBlock(int x, int y, int z, byte[][] chunk) {
         if (chunk[y >> 4] == null) {
             return (byte) 0;
         }

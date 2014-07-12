@@ -22,6 +22,13 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * The central game listener for operating the mechanics of the
+ * world. This includes killing people, adjusting temperatures,
+ * and helpful resources.
+ *
+ * @author turt2live
+ */
 public class GameListener implements Listener {
 
     // Not a real temperature scale
@@ -73,7 +80,7 @@ public class GameListener implements Listener {
         }, 0L, 20L * 1);
     }
 
-    public void adjustTemperature(Player player) {
+    private void adjustTemperature(Player player) {
         int worldTemp;
 
         long time = player.getWorld().getTime();

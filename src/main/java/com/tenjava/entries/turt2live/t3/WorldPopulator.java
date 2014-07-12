@@ -7,6 +7,11 @@ import org.bukkit.generator.BlockPopulator;
 
 import java.util.Random;
 
+/**
+ * The world populator used to enhance the spawn point of the world
+ *
+ * @author turt2live
+ */
 public class WorldPopulator extends BlockPopulator {
 
     private int spawnY;

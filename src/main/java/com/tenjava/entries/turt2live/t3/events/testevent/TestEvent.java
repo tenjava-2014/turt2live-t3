@@ -1,5 +1,6 @@
 package com.tenjava.entries.turt2live.t3.events.testevent;
 
+import com.tenjava.entries.turt2live.t3.EntityUtil;
 import com.tenjava.entries.turt2live.t3.events.EventManager;
 import com.tenjava.entries.turt2live.t3.events.RandomEvent;
 import org.bukkit.Bukkit;
@@ -51,6 +52,15 @@ public class TestEvent extends RandomEvent {
 
         mob1 = (Creature) playerLocation.getWorld().spawnEntity(mobLocation1, EntityType.VILLAGER);
         mob2 = (Creature) playerLocation.getWorld().spawnEntity(mobLocation2, EntityType.VILLAGER);
+
+        try {
+            EntityUtil.removeGoals(mob1);
+            EntityUtil.removeGoals(mob2);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         mob1.setTarget(mob2);
     }

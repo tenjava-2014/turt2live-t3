@@ -1,7 +1,4 @@
 name: turt2live-t3
 main: com.tenjava.entries.turt2live.t3.TenJava
 version: '${project.version}'
-commands:
-    test:
-        description: test
-        usage: /<command>
+load: STARTUP

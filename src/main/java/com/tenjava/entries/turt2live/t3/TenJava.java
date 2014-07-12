@@ -1,46 +1,38 @@
 package com.tenjava.entries.turt2live.t3;
 
-import com.tenjava.entries.turt2live.t3.events.EventManager;
-import com.tenjava.entries.turt2live.t3.events.fightclub.FightClubEvent;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TenJava extends JavaPlugin {
+public class TenJava extends JavaPlugin implements Listener {
 
     private static TenJava instance;
-
-    private EventManager eventManager;
 
     @Override
     public void onEnable() {
         instance = this;
 
-        saveDefaultConfig();
-
-        // Init everything
-        eventManager = new EventManager(getConfig().getInt("max-events", 10));
-
-        // Load some events
-        eventManager.registerEvent(new FightClubEvent());
-
-        // Start everything
-        eventManager.start();
+        getServer().getPluginManager().registerEvents(this, this);
     }
 
     @Override
     public void onDisable() {
-        // HALT
-        eventManager.stop();
-
         instance = null;
     }
 
-    /**
-     * Gets the current event manager
-     *
-     * @return the current event manager
-     */
-    public EventManager getEventManager() {
-        return eventManager;
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        event.getPlayer().setGameMode(GameMode.CREATIVE);
+        event.getPlayer().teleport(new Location(event.getPlayer().getWorld(), 8, 130, 8));
+    }
+
+    @Override
+    public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
+        return new WorldGenerator();
     }
 
     /**

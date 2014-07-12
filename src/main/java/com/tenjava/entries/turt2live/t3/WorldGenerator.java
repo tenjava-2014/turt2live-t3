@@ -112,7 +112,7 @@ public class WorldGenerator extends ChunkGenerator {
             double r = random.nextDouble();
 
             if (r < 0.1) sphereId = Material.DIRT.getId();
-            if (r < 0.01) sphereId = Material.STONE.getId();
+            if (r < 0.01) sphereId = Material.PACKED_ICE.getId();
             if (r < 0.006) sphereId = Material.IRON_BLOCK.getId();
             if (r < 0.002) sphereId = Material.DIAMOND_BLOCK.getId();
 
@@ -163,7 +163,7 @@ public class WorldGenerator extends ChunkGenerator {
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
-        return new Location(world, 9.5, spawnY + 2, 9.5);
+        return new Location(world, 8.5, spawnY, 8.5);
     }
 
     public void setRange(int sx, int sy, int sz, int dx, int dy, int dz, int id, byte[][] chunk) {
